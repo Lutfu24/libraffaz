@@ -1,0 +1,80 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "name": "Küləklə Sovrulanlar",
+      "image": "../images/books/Küləklə_sovrulanlar_(roman).jpg",
+      "price": 22.5,
+      "sale": 15,
+      "author": "Margaret Mitchell",
+      "genre": "Tarixi Roman",
+      "description": "Amerika vətəndaş müharibəsi dövründə bir qadının həyat hekayəsi.",
+      "language": ["Azərbaycan", "İngilis"],
+      "comments": ["Çox təsirli roman idi.", "Tərcüməsi gözəldir."],
+      "sellCount": 150,
+      "stock": 30
+    },
+    {
+      "id": 2,
+      "name": "Əli və Nino",
+      "image": "../images/books/Ali_ve_Nino_kapak_2022.png",
+      "price": 18.0,
+      "sale": 10,
+      "author": "Kurban Said",
+      "genre": "Romantik",
+      "description": "Müsəlman azərbaycanlı Əli və gürcü xristian Nino arasında eşq hekayəsi.",
+      "language": ["Azərbaycan", "Rus", "İngilis"],
+      "comments": [
+        "Azərbaycan ədəbiyyatının incilərindən biri.",
+        "Tarixi və sevgi bir arada."
+      ],
+      "sellCount": 230,
+      "stock": 15
+    },
+    {
+      "id": 3,
+      "name": "1984",
+      "image": "../images/books/9786057462220-us-300.jpg",
+      "price": 25.0,
+      "sale": 20,
+      "author": "George Orwell",
+      "genre": "Distopik",
+      "description": "Totalitar rejimlərə qarşı yazılmış simvolik roman.",
+      "language": ["İngilis", "Azərbaycan", "Türk"],
+      "comments": [
+        "Oxuduqdan sonra uzun müddət təsiri qalır.",
+        "Çox düşündürücüdür."
+      ],
+      "sellCount": 320,
+      "stock": 22
+    },
+    {
+      "id": 4,
+      "name": "Yüz İlin Tənhalığı",
+      "image": "../images/books/thumb.jpeg",
+      "price": 30.0,
+      "sale": 5,
+      "author": "Gabriel García Márquez",
+      "genre": "Magik Realizm",
+      "description": "Bir ailənin yeddi nəsil boyunca başına gələnlər və zamanın dövrü.",
+      "language": ["Azərbaycan", "İspan", "İngilis"],
+      "comments": ["Ustad işi!", "Bir az çətin olsa da oxumağa dəyər."],
+      "sellCount": 180,
+      "stock": 12
+    },
+    {
+      "id": 5,
+      "name": "Cinayət və Cəza",
+      "image": "../images/books/Cinayət-və-cəza.png",
+      "price": 20.0,
+      "sale": 12,
+      "author": "Fyodor Dostoyevski",
+      "genre": "Psixoloji Roman",
+      "description": "Bir gəncin cinayət işlədikdən sonra yaşadığı daxili əzab.",
+      "language": ["Azərbaycan", "Rus", "Türk"],
+      "comments": ["Dərin fəlsəfi fikirlər var.", "Çox ağır və maraqlıdır."],
+      "sellCount": 270,
+      "stock": 18
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.12",
+    "json-server": "^1.0.0-beta.3",
+    "tailwindcss": "^4.1.12"
+  },
+  "scripts": {
+    "css": "npx @tailwindcss/cli -i ./src/css/input.css -o ./src/css/output.css --watch"
+  }
+}

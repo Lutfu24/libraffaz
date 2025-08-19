@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Libraff.az</title>
+  </head>
+  <body>
+    <header class="w-full flex justify-center">
+      <div class="w-[70%] h-[100px] flex justify-between items-center">
+        <div class="w-[170px] flex items-center gap-2">
+          <i class="fa fa-bars !hidden max-xl:!flex" aria-hidden="true"></i>
+          <img src="../images/logo/logo_b1x3-5c.png" alt="logo" />
+        </div>
+        <div>
+          <button
+            class="mr-5 rounded-3xl py-2 px-8 bg-red-500 text-white max-xl:hidden"
+          >
+            Kataloq
+          </button>
+          <label class="relative max-xl:hidden">
+            <input
+              class="w-[500px] outline-none py-2 rounded-3xl pl-4 placeholder:text-black placeholder:text-[14px] border-1 border-solid border-sky-300"
+              type="search"
+              placeholder="Növbəti kitabınızı axtarın"
+            />
+            <i
+              class="fa fa-search absolute right-3 top-1 hover:text-red-600 hover:cursor-pointer"
+              aria-hidden="true"
+            ></i>
+          </label>
+        </div>
+        <div>
+          <select name="" id="">
+            <option value="">AZ</option>
+          </select>
+          <button>Hesabım</button>
+        </div>
+      </div>
+    </header>
+    <header class="w-full flex justify-center max-lg:hidden">
+      <div class="w-[70%] h-[20px] flex justify-between items-center">
+        <ul class="flex gap-3 text-[14px] font-semibold">
+          <li>Bestseller-iyul</li>
+          <li>Endirimlər</li>
+          <li>Müəlliflər</li>
+          <li>Klassiklər</li>
+        </ul>
+        <ul class="flex gap-3 text-[14px] text-gray-600">
+          <li>Ödəniş və çatdırılma</li>
+          <li>Loyallıq kartı</li>
+          <li>FAQ</li>
+          <li>Əlaqə</li>
+        </ul>
+      </div>
+    </header>
+    <section class="w-full flex justify-center">
+      <div
+        id="cards"
+        class="w-[70%] grid grid-cols-5 place-items-center my-20 gap-5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1"
+      ></div>
+    </section>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
