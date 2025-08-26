@@ -1,15 +1,22 @@
 import obj from "./popupservice.js";
+import getAllData from "./url.js";
 
-fetch("http://localhost:3000/books")
-  .then((res) => res.json())
-  .then((res) => {
-    showCards(res);
-  });
+async function useFetch() {
+  const data = await getAllData();
+  showCards(data);
+  checkWish();
+}
+useFetch();
 
-function showCards(res) {
+function showCards(data) {
   let html = "";
-  res.forEach((element) => {
-    html += `<div class="py-[10px] px-[20px]">
+  data.forEach((element) => {
+    html += `<div class="py-[10px] px-[20px] relative">
+              <button onclick="addWish(${
+                element.id
+              })" class="absolute top-1 right-2"><i id="wish-btn${
+      element.id
+    }" class="fa-regular fa-heart bg-white text-2xl text-gray-500 hover:text-red-600 hover:cursor-pointer"></i></button>
               <a href="detail.html?id=${element.id}">
               <img class="rounded-2xl" src="${element.image}" alt="img">
               </a>
@@ -28,13 +35,15 @@ function showCards(res) {
 }
 
 function showPopUp() {
-  document.getElementById("pop-up").classList.remove("hidden");
+  document.getElementById("pop-up").classList.toggle("hidden");
 }
 
 document.getElementById("catalog-btn").addEventListener("click", showPopUp);
-document.getElementById("pop-up").addEventListener("click", function (e) {
-  if (e.target.localName !== "div")
-    document.getElementById("pop-up").classList.add("hidden");
+document.getElementById("pop-up").addEventListener("click", function () {
+  document.getElementById("pop-up").classList.add("hidden");
+});
+document.getElementById("pop-up-item").addEventListener("click", (e) => {
+  e.stopPropagation();
 });
 
 Object.entries(obj).forEach(([key, value]) => {
@@ -99,3 +108,29 @@ function showPopUpElm2(e) {
       });
   });
 }
+
+let wishArr = JSON.parse(localStorage.getItem("wishlist")) || [];
+function checkWish() {
+  wishArr.forEach((id) => {
+    document.getElementById(`wish-btn${id}`).style.color = "red";
+  });
+  document.getElementById("wish-count").innerText = wishArr.length;
+}
+
+document.addWish = (id) => {
+  if (wishArr.includes(id)) {
+    wishArr.splice(
+      wishArr.findIndex((item) => item === id),
+      1
+    );
+    document.getElementById(`wish-btn${id}`).style.color = "gray";
+  } else {
+    wishArr.push(id);
+    document.getElementById(`wish-btn${id}`).style.color = "red";
+  }
+  localStorage.setItem("wishlist", JSON.stringify(wishArr));
+  document.getElementById("wish-count").innerText = wishArr.length;
+};
+
+const basket = JSON.parse(localStorage.getItem("basket")) || [];
+document.getElementById("basket-count").innerText = basket.length;

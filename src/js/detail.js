@@ -1,11 +1,12 @@
+import { getByIdData } from "./url.js";
 const query = location.search;
 const id = new URLSearchParams(query).get("id");
 
-fetch(`http://localhost:3000/books/${id}`)
-  .then((res) => res.json())
-  .then((res) => {
-    showCard(res);
-  });
+async function useFetch() {
+  const res = await getByIdData(id);
+  showCard(res);
+}
+useFetch();
 
 function showCard(res) {
   let html = "";
@@ -32,7 +33,8 @@ function showCard(res) {
               >-${res.sale}%</span
             >
             <button
-              class="w-full py-3 mb-5 bg-red-500 rounded-3xl mt-10 text-white"
+              onclick="addBasket(${res.id})"
+              class="w-full py-3 mb-5 bg-red-500 rounded-3xl mt-10 text-white cursor-pointer"
             >
               Səbətə əlavə et
             </button>
@@ -69,3 +71,17 @@ function showCard(res) {
         </div>`;
   document.getElementById("card").innerHTML = html;
 }
+
+const basketArr = JSON.parse(localStorage.getItem("basket")) || [];
+document.addBasket = function (id) {
+  let obj = {
+    count: 1,
+    item: id,
+  };
+  if (basketArr.some((element) => element.item === id)) {
+    basketArr.find((item) => item.item === id).count++;
+  } else {
+    basketArr.push(obj);
+  }
+  localStorage.setItem("basket", JSON.stringify(basketArr));
+};
