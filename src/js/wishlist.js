@@ -1,5 +1,10 @@
 import getAllData from "./url.js";
-let wishArr = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+const basket = JSON.parse(localStorage.getItem("basket")) || [];
+document.getElementById("basket-count").innerText = basket.length;
+const wishArr = JSON.parse(localStorage.getItem("wishlist")) || [];
+document.getElementById("wish-count").innerText = wishArr.length;
+
 let data = [];
 
 async function useFetch() {

@@ -11,17 +11,26 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Libraff.az</title>
+    <title>Document</title>
   </head>
   <body>
     <div id="header"></div>
     <section class="w-full flex justify-center">
-      <div
-        id="cards"
-        class="w-[70%] grid grid-cols-5 place-items-center my-20 gap-5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1"
-      ></div>
+      <div id="card" class="w-[70%] my-20">
+        <h1 class="font-bold text-3xl">Kitab</h1>
+        <div class="flex">
+          <div class="w-[20%]">
+            <h1 class="font-bold my-10">Kateqoriyalar</h1>
+            <ul id="categs"></ul>
+          </div>
+          <div
+            id="cards"
+            class="w-[80%] grid grid-cols-4 my-25 gap-5 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1"
+          ></div>
+        </div>
+      </div>
     </section>
     <script type="module" src="../middleware/head.js"></script>
-    <script type="module" src="../js/script.js"></script>
+    <script type="module" src="../js/book.js"></script>
   </body>
 </html>

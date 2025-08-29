@@ -2,9 +2,14 @@ import obj from "./popupservice.js";
 import getAllData from "./url.js";
 
 async function useFetch() {
-  const data = await getAllData();
-  showCards(data);
-  checkWish();
+  try {
+    const data = await getAllData();
+    if (!data) throw new Error("data bosdur!");
+    showCards(data);
+    checkWish();
+  } catch (err) {
+    console.warn(err.message);
+  }
 }
 useFetch();
 
@@ -49,7 +54,7 @@ document.getElementById("pop-up-item").addEventListener("click", (e) => {
 Object.entries(obj).forEach(([key, value]) => {
   document.querySelector(
     ".first-ul"
-  ).innerHTML += `<span class="absolute text-gray-400 right-0">⟩</span><li class="first-list cursor-pointer hover:text-red-600 w-full">${key}</li>`;
+  ).innerHTML += `<span class="absolute text-gray-400 right-0">⟩</span><a href="book.html"><li class="first-list hover:text-red-600 w-full">${key}</li></a>`;
   if (key === "Kitab") {
     Object.entries(value).forEach(([key, value]) => {
       document.querySelector(
@@ -59,7 +64,7 @@ Object.entries(obj).forEach(([key, value]) => {
         value.forEach((item) => {
           document.querySelector(
             ".third-ul"
-          ).innerHTML += `<li class="cursor-pointer hover:text-red-600">${item}</li>`;
+          ).innerHTML += `<a href="book.html?categ=${item}"><li class="cursor-pointer hover:text-red-600">${item}</li></a>`;
         });
     });
   }
@@ -82,7 +87,7 @@ function showPopUpElm(e) {
       value.forEach((item) => {
         document.querySelector(
           ".third-ul"
-        ).innerHTML += `<li  class="cursor-pointer hover:text-red-600">${item}</li>`;
+        ).innerHTML += `<a href="book.html?categ=${item}"><li  class="cursor-pointer hover:text-red-600">${item}</li></a>`;
       });
   });
   document.querySelectorAll(".second-list").forEach((li) => {
@@ -104,7 +109,7 @@ function showPopUpElm2(e) {
       value[elm].forEach((item) => {
         document.querySelector(
           ".third-ul"
-        ).innerHTML += `<li  class="cursor-pointer hover:text-red-600">${item}</li>`;
+        ).innerHTML += `<a href="book.html?categ=${item}"><li  class="cursor-pointer hover:text-red-600">${item}</li></a>`;
       });
   });
 }

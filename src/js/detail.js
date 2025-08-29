@@ -1,10 +1,21 @@
 import { getByIdData } from "./url.js";
+
+const basket = JSON.parse(localStorage.getItem("basket")) || [];
+document.getElementById("basket-count").innerText = basket.length;
+const wishArr = JSON.parse(localStorage.getItem("wishlist")) || [];
+document.getElementById("wish-count").innerText = wishArr.length;
+
 const query = location.search;
 const id = new URLSearchParams(query).get("id");
 
 async function useFetch() {
-  const res = await getByIdData(id);
-  showCard(res);
+  try {
+    const res = await getByIdData(id);
+    if (!res) throw new Error("data bosdur!");
+    showCard(res);
+  } catch (err) {
+    console.error(err.message);
+  }
 }
 useFetch();
 
@@ -84,4 +95,5 @@ document.addBasket = function (id) {
     basketArr.push(obj);
   }
   localStorage.setItem("basket", JSON.stringify(basketArr));
+  document.getElementById("basket-count").innerText = basketArr.length;
 };

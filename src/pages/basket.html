@@ -14,56 +14,7 @@
     <title>Document</title>
   </head>
   <body>
-    <header class="w-full flex justify-center">
-      <div class="w-[70%] h-[100px] flex justify-between items-center">
-        <div class="w-[170px] flex items-center gap-2">
-          <i class="fa fa-bars !hidden max-xl:!flex" aria-hidden="true"></i>
-          <a href="index.html"
-            ><img src="../images/logo/logo_b1x3-5c.png" alt="logo"
-          /></a>
-        </div>
-        <div>
-          <button
-            class="mr-5 rounded-3xl py-2 px-8 bg-red-500 text-white max-xl:hidden"
-          >
-            Kataloq
-          </button>
-          <label class="relative max-xl:hidden">
-            <input
-              class="w-[500px] outline-none py-2 rounded-3xl pl-4 placeholder:text-black placeholder:text-[14px] border-1 border-solid border-sky-300"
-              type="search"
-              placeholder="Növbəti kitabınızı axtarın"
-            />
-            <i
-              class="fa fa-search absolute right-3 top-1 hover:text-red-600 hover:cursor-pointer"
-              aria-hidden="true"
-            ></i>
-          </label>
-        </div>
-        <div>
-          <select name="" id="">
-            <option value="">AZ</option>
-          </select>
-          <button>Hesabım</button>
-        </div>
-      </div>
-    </header>
-    <header class="w-full flex justify-center max-lg:hidden">
-      <div class="w-[70%] h-[20px] flex justify-between items-center">
-        <ul class="flex gap-3 text-[14px] font-semibold">
-          <li>Bestseller-iyul</li>
-          <li>Endirimlər</li>
-          <li>Müəlliflər</li>
-          <li>Klassiklər</li>
-        </ul>
-        <ul class="flex gap-3 text-[14px] text-gray-600">
-          <li>Ödəniş və çatdırılma</li>
-          <li>Loyallıq kartı</li>
-          <li>FAQ</li>
-          <li>Əlaqə</li>
-        </ul>
-      </div>
-    </header>
+    <div id="header"></div>
     <section class="w-full flex justify-center">
       <div class="w-[70%] my-20">
         <h1 class="font-semibold text-3xl">Səbətdə olanlar</h1>
@@ -75,8 +26,36 @@
           ><span class="absolute right-0">Cəm (₼)</span>
         </p>
         <div id="basket"></div>
+        <div class="relative py-8">
+          <p class="absolute right-40 text-2xl text-gray-400 font-bold">
+            Cəm məbləğ (₼)
+          </p>
+          <p id="total" class="absolute right-0 text-2xl font-semibold">
+            0.00 ₼
+          </p>
+        </div>
+        <div class="relative my-20">
+          <a
+            href="index.html"
+            class="bg-black text-white font-bold rounded-3xl px-5 py-2"
+          >
+            Alış-verişə davam et
+          </a>
+          <button
+            id="delete-btn"
+            class="border-2 border-solid border-red-600 font-semibold rounded-3xl px-3 py-1 ml-3 cursor-pointer"
+          >
+            Səbəti təmizlə
+          </button>
+          <button
+            class="absolute right-0 bg-red-500 text-white font-semibold rounded-3xl px-5 py-2 cursor-pointer"
+          >
+            ✓ Sifarişi təsdiqlə
+          </button>
+        </div>
       </div>
     </section>
+    <script type="module" src="../middleware/head.js"></script>
     <script type="module" src="../js/basket.js"></script>
   </body>
 </html>
