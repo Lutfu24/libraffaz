@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>admin panel</title>
+  </head>
+  <body>
+    <div class="container p-2 mx-auto sm:p-4 dark:text-gray-800">
+      <button
+        class="mb-4 text-2xl font-semibold leading-tight cursor-pointer bg-green-700 text-white rounded-md py-1 px-5"
+      >
+        + Create
+      </button>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-xs">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col class="w-24" />
+          </colgroup>
+          <thead class="dark:bg-gray-300">
+            <tr class="text-left">
+              <th class="p-3">Image</th>
+              <th class="p-3">Name</th>
+              <th class="p-3">Price</th>
+              <th class="p-3">Sale</th>
+              <th class="p-3">Delete</th>
+              <th class="p-3">Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50"
+            >
+              <td class="p-3">
+                <img src="" alt="" />
+              </td>
+              <td class="p-3">
+                <p>Microsoft Corporation</p>
+              </td>
+              <td class="p-3">
+                <p>14 Jan 2022</p>
+              </td>
+              <td class="p-3">
+                <p>01 Feb 2022</p>
+              </td>
+              <td>
+                <button
+                  class="px-3 py-1 font-semibold rounded-md bg-red-600 text-gray-50"
+                >
+                  Delete
+                </button>
+              </td>
+              <td>
+                <button
+                  class="px-3 py-1 font-semibold rounded-md bg-yellow-600 text-gray-50"
+                >
+                  Update
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script type="module" src="../js/admin.js"></script>
+  </body>
+</html>

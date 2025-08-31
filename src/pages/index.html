@@ -11,16 +11,81 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <style>
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #444;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
     <title>Libraff.az</title>
   </head>
   <body>
-    <div id="header"></div>
+    <div id="header" class="mb-5"></div>
+
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img
+            src="../images/slider/web-3840x1000-daniel-chidiac.webp"
+            alt=""
+          />
+        </div>
+        <div class="swiper-slide">
+          <img
+            src="../images/slider/web-3840x1000-Yayın-Son-Fürsəti.webp"
+            alt=""
+          />
+        </div>
+        <div class="swiper-slide">
+          <img src="../images/slider/Hero-banner-desktop-20_-discount.webp" />
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
     <section class="w-full flex justify-center">
       <div
         id="cards"
         class="w-[70%] grid grid-cols-5 place-items-center my-20 gap-5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1"
       ></div>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+    </script>
+
     <script type="module" src="../middleware/head.js"></script>
     <script type="module" src="../js/script.js"></script>
   </body>
