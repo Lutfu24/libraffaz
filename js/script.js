@@ -22,7 +22,7 @@ function showCards(data) {
               })" class="absolute top-1 right-2"><i id="wish-btn${
       element.id
     }" class="fa-regular fa-heart bg-white text-2xl text-gray-500 hover:text-red-600 hover:cursor-pointer"></i></button>
-              <a href="./pages/detail.html?id=${element.id}">
+              <a href="detail.html?id=${element.id}">
               <img class="rounded-2xl" src="${element.image}" alt="img">
               </a>
               <p class="my-2">${element.name}</p>
@@ -54,7 +54,7 @@ document.getElementById("pop-up-item").addEventListener("click", (e) => {
 Object.entries(obj).forEach(([key, value]) => {
   document.querySelector(
     ".first-ul"
-  ).innerHTML += `<span class="absolute text-gray-400 right-0">⟩</span><a href="./pages/book.html"><li class="first-list hover:text-red-600 w-full">${key}</li></a>`;
+  ).innerHTML += `<span class="absolute text-gray-400 right-0">⟩</span><a href="book.html"><li class="first-list hover:text-red-600 w-full">${key}</li></a>`;
   if (key === "Kitab") {
     Object.entries(value).forEach(([key, value]) => {
       document.querySelector(
@@ -64,7 +64,7 @@ Object.entries(obj).forEach(([key, value]) => {
         value.forEach((item) => {
           document.querySelector(
             ".third-ul"
-          ).innerHTML += `<a href="./pages/book.html?categ=${item}"><li class="cursor-pointer hover:text-red-600">${item}</li></a>`;
+          ).innerHTML += `<a href="book.html?categ=${item}"><li class="cursor-pointer hover:text-red-600">${item}</li></a>`;
         });
     });
   }
@@ -87,7 +87,7 @@ function showPopUpElm(e) {
       value.forEach((item) => {
         document.querySelector(
           ".third-ul"
-        ).innerHTML += `<a href="./pages/book.html?categ=${item}"><li  class="cursor-pointer hover:text-red-600">${item}</li></a>`;
+        ).innerHTML += `<a href="book.html?categ=${item}"><li  class="cursor-pointer hover:text-red-600">${item}</li></a>`;
       });
   });
   document.querySelectorAll(".second-list").forEach((li) => {
@@ -109,7 +109,7 @@ function showPopUpElm2(e) {
       value[elm].forEach((item) => {
         document.querySelector(
           ".third-ul"
-        ).innerHTML += `<a href="./pages/book.html?categ=${item}"><li  class="cursor-pointer hover:text-red-600">${item}</li></a>`;
+        ).innerHTML += `<a href="book.html?categ=${item}"><li  class="cursor-pointer hover:text-red-600">${item}</li></a>`;
       });
   });
 }
