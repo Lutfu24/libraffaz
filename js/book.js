@@ -31,6 +31,8 @@ function getByCategData(data) {
   const genre = new URLSearchParams(query).get("categ");
   const filteredData = data.filter((item) => item.genre === genre);
   filteredData.forEach((element) => {
+    element.price = Number(element.price);
+    element.sale = Number(element.sale);
     html += `<div class="py-[10px] px-[20px] relative">
                 <button onclick="addWish(${
                   element.id

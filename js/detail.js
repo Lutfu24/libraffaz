@@ -20,6 +20,8 @@ async function useFetch() {
 useFetch();
 
 function showCard(res) {
+  res.price = Number(res.price);
+  res.sale = Number(res.sale);
   let html = "";
   html += `<div class="flex justify-between max-xl:flex-col">
           <div class="w-full flex justify-center items-center">

@@ -48,5 +48,47 @@ document.deleteDataById = async function (id) {
   await fetch(`https://libraff-data-rlzv.onrender.com/books/${id}`, {
     method: "DELETE",
   });
-  useFetch();
+  await useFetch();
+  swal({
+    title: "deleted book!",
+    icon: "success",
+    button: "ok!",
+  });
 };
+
+document.getElementById("show-btn").addEventListener("click", function () {
+  document.getElementById("create-modal").classList.remove("hidden");
+});
+
+async function createData() {
+  const productObj = {
+    author: document.getElementById("author").value,
+    comments: [],
+    description: document.getElementById("description").value,
+    genre: document.getElementById("genre").value,
+    image: document.getElementById("image").value,
+    language: ["Azərbaycan dili", "İngilis"],
+    name: document.getElementById("name").value,
+    price: Number(document.getElementById("price").value),
+    sale: Number(document.getElementById("sale").value),
+    sellCount: 0,
+    stock: 10,
+  };
+  console.log(productObj);
+  await fetch("https://libraff-data-rlzv.onrender.com/books", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(productObj),
+  });
+  document.getElementById("create-modal").classList.add("hidden");
+  await useFetch();
+  swal({
+    title: "Created book!",
+    icon: "success",
+    button: "ok!",
+  });
+}
+
+document.getElementById("create-btn").addEventListener("click", createData);

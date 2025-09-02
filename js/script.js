@@ -4,6 +4,7 @@ import getAllData from "./url.js";
 async function useFetch() {
   try {
     const data = await getAllData();
+    console.log(data);
     if (!data) throw new Error("data bosdur!");
     showCards(data);
     checkWish();
@@ -16,6 +17,8 @@ useFetch();
 function showCards(data) {
   let html = "";
   data.forEach((element) => {
+    element.price = Number(element.price);
+    element.sale = Number(element.sale);
     html += `<div class="py-[10px] px-[20px] relative">
               <button onclick="addWish(${
                 element.id

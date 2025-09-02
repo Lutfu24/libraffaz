@@ -17,6 +17,8 @@ function showBasket(data) {
   basket.forEach((obj) => {
     const inp = localStorage.getItem(`inp${obj.item}`);
     data.forEach((item) => {
+      item.price = Number(item.price);
+      item.sale = Number(item.sale);
       if (Number(item.id) === obj.item)
         html += `<div class="flex relative my-3 mx-2">
                   <img
@@ -42,7 +44,8 @@ function showBasket(data) {
                     oninput="sumTotal(event,${item.id})"
                   />
                   <p id="total${item.id}" class="absolute right-0 font-bold">${(
-          item.price * obj.count
+          (item.price - (item.price * item.sale) / 100) *
+          obj.count
         ).toFixed(2)} ₼</p>
                 </div>`;
     });

@@ -21,6 +21,8 @@ function showWish() {
     filteredArr.push(...data.filter((item) => Number(item.id) === id));
   });
   filteredArr.forEach((element) => {
+    element.price = Number(element.price);
+    element.sale = Number(element.sale);
     html += `<div class="py-[10px] px-[20px] relative">
               <button onclick="removeWish(${
                 element.id
