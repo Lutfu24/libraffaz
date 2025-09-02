@@ -54,7 +54,7 @@ export default function showHeader() {
             <option value="">AZ</option>
           </select>
           <button>Hesabım</button>
-          <a href="wishlist.html"
+          <a href="./pages/wishlist.html"
             ><i class="fa-regular fa-heart"></i
             ><sup class="text-[16px] text-red-700" id="wish-count">0</sup></a
           >

@@ -27,7 +27,7 @@ function showWish() {
               })" class="absolute top-1 right-2"><i id="wish-btn${
       element.id
     }" class="fa-regular fa-heart bg-white text-2xl text-gray-500 hover:text-red-600 hover:cursor-pointer"></i></button>
-              <a href="detail.html?id=${element.id}">
+              <a href="./pages/detail.html?id=${element.id}">
               <img class="rounded-2xl" src="${element.image}" alt="img">
               </a>
               <p class="my-2">${element.name}</p>
