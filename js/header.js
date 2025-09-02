@@ -71,7 +71,7 @@ export default function showHeader() {
           <li>Bestseller-iyul</li>
           <li>Endirimlər</li>
           <li>Müəlliflər</li>
-          <li>Klassiklər</li>
+          <a href="book.html?categ=Klassiklər" class="hover:text-red-600"><li>Klassiklər</li></a>
         </ul>
         <ul class="flex gap-3 text-[14px] text-gray-600">
           <li>Ödəniş və çatdırılma</li>

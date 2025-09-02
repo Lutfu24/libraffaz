@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="../css/output.css" rel="stylesheet" />
+    <link href="../src/output.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
@@ -16,21 +16,9 @@
   <body>
     <div id="header"></div>
     <section class="w-full flex justify-center">
-      <div id="card" class="w-[70%] my-20">
-        <h1 class="font-bold text-3xl">Kitab</h1>
-        <div class="flex">
-          <div class="w-[20%]">
-            <h1 class="font-bold my-10">Kateqoriyalar</h1>
-            <ul id="categs"></ul>
-          </div>
-          <div
-            id="cards"
-            class="w-[80%] grid grid-cols-4 my-25 gap-5 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1"
-          ></div>
-        </div>
-      </div>
+      <div id="card" class="w-[70%] my-20"></div>
     </section>
     <script type="module" src="../middleware/head.js"></script>
-    <script type="module" src="../js/book.js"></script>
+    <script type="module" src="../js/detail.js"></script>
   </body>
 </html>
