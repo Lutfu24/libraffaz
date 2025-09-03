@@ -1,27 +1,27 @@
 const obj = {
   Kitab: {
     "Bədii ədəbiyyat": [
-      "Antologiya",
-      "Bioqrafiya, avtobioqrafiya & Xatirə",
-      "Detektiv",
-      "Elmi-fantastika & Fantaziya",
-      "Fəlsəfə",
-      "Hekayələr & Oçerklər",
-      "Kino və teatr",
-      "Klassik poemalar",
-      "Klassiklər",
-      "Komiks",
+      "Distopiya",
+      "Romantik",
       "Macəra",
-      "Mifologiya",
-      "Nağıllar",
-      "Poemalar",
-      "Psixologiya",
-      "Romanlar & Novellalar",
-      "Satira",
-      "Tarix, hüquq & Siyasi",
-      "Tarixi roman",
-      "Triller, mistika & Qorxu",
-      "Təhsil, mənbə & Dil",
+      "Tarixi",
+      "Coming‑of‑age",
+      "Qotik",
+      "Siyasi satira",
+      "Elm‑fantastika",
+      "Klassiklər",
+      "Fantaziya",
+      "Triller",
+      "Fəlsəfi",
+      "Uşaq ədəbiyyatı",
+      "Psixoloji",
+      "Magik realizm",
+      "Epos",
+      "Cinayət",
+      "Gənc Yetkin",
+      "Post‑apokaliptik",
+      "Qeyri‑bədii",
+      "Tarixi Roman",
     ],
     "Qeyri-bədii ədəbiyyat": [
       "Ailə",
@@ -279,4 +279,74 @@ const obj = {
   },
 };
 
+Object.entries(obj).forEach(([key, value]) => {
+  document.querySelector(
+    ".first-ul"
+  ).innerHTML += `<span class="absolute text-gray-400 right-0">⟩</span><a href="book.html"><li class="first-list hover:text-red-600 w-full">${key}</li></a>`;
+  if (key === "Kitab") {
+    Object.entries(value).forEach(([key, value]) => {
+      document.querySelector(
+        ".second-ul"
+      ).innerHTML += `<span class="absolute text-gray-400 right-0">⟩</span><li class="second-list cursor-pointer hover:text-red-600">${key}</li>`;
+      if (key === "Bədii ədəbiyyat")
+        value.forEach((item) => {
+          document.querySelector(
+            ".third-ul"
+          ).innerHTML += `<a href="book.html?categ=${item}"><li class="cursor-pointer hover:text-red-600">${item}</li></a>`;
+        });
+    });
+  }
+});
+
+function showPopUp() {
+  document.getElementById("pop-up").classList.toggle("hidden");
+  if (!document.getElementById("pop-up").classList.contains("hidden")) {
+    document.getElementById(
+      "catalog-btn"
+    ).innerHTML = `<i class="fa-solid fa-xmark animate__animated animate__rotateIn"></i><span>Kataloq</span>`;
+  } else {
+    document.getElementById(
+      "catalog-btn"
+    ).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-grid" viewBox="0 0 16 16">
+                   <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
+                   </svg><span>Kataloq</span>`;
+  }
+}
+
+function showPopUpElm(e) {
+  document.querySelector(".second-ul").innerHTML = "";
+  document.querySelector(".third-ul").innerHTML = "";
+  const elm = Object.keys(obj).find((item) => item === e.target.innerText);
+  Object.entries(obj[elm]).forEach(([key, value]) => {
+    document.querySelector(
+      ".second-ul"
+    ).innerHTML += `<span class="absolute text-gray-400 right-0">⟩</span><li class="second-list cursor-pointer hover:text-red-600">${key}</li>`;
+    if (key === "Bədii ədəbiyyat")
+      value.forEach((item) => {
+        document.querySelector(
+          ".third-ul"
+        ).innerHTML += `<a href="book.html?categ=${item}"><li  class="cursor-pointer hover:text-red-600">${item}</li></a>`;
+      });
+  });
+  document.querySelectorAll(".second-list").forEach((li) => {
+    li.addEventListener("mouseenter", showPopUpElm2);
+  });
+}
+
+function showPopUpElm2(e) {
+  document.querySelector(".third-ul").innerHTML = "";
+  Object.entries(obj).forEach(([key, value]) => {
+    const elm = Object.keys(obj[key]).find(
+      (item) => item === e.target.innerText
+    );
+    if (elm)
+      value[elm].forEach((item) => {
+        document.querySelector(
+          ".third-ul"
+        ).innerHTML += `<a href="book.html?categ=${item}"><li  class="cursor-pointer hover:text-red-600">${item}</li></a>`;
+      });
+  });
+}
+
 export default obj;
+export { showPopUpElm, showPopUpElm2, showPopUp };

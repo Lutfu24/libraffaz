@@ -60,6 +60,14 @@ document.getElementById("show-btn").addEventListener("click", function () {
   document.getElementById("create-modal").classList.remove("hidden");
 });
 
+document.getElementById("create-modal").addEventListener("click", () => {
+  document.getElementById("create-modal").classList.add("hidden");
+});
+
+document.getElementById("form").addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+
 async function createData() {
   const productObj = {
     author: document.getElementById("author").value,
@@ -74,7 +82,6 @@ async function createData() {
     sellCount: 0,
     stock: 10,
   };
-  console.log(productObj);
   await fetch("https://libraff-data-rlzv.onrender.com/books", {
     method: "POST",
     headers: {

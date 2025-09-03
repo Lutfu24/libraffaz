@@ -5,12 +5,14 @@ export default function showHeader() {
           <i class="fa fa-bars !hidden max-xl:!flex" aria-hidden="true"></i>
           <a href="index.html"><img src="../images/logo/logo_b1x3-5c.png" alt="logo" /></a>
         </div>
-        <div class="max-lg:hidden">
+        <div class="max-lg:hidden flex items-center">
           <button
             id="catalog-btn"
-            class="relative mr-5 z-1001 rounded-3xl py-2 px-8 cursor-pointer bg-red-500 text-white max-xl:hidden"
-          >
-            Kataloq
+            class="relative mr-5 z-1001 rounded-3xl flex items-center gap-2 py-2 px-8 cursor-pointer bg-red-500 text-white max-xl:hidden"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-grid" viewBox="0 0 16 16">
+            <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
+            </svg><span>Kataloq</span>
           </button>
           <div
             id="pop-up"
@@ -44,23 +46,27 @@ export default function showHeader() {
               placeholder="Növbəti kitabınızı axtarın"
             />
             <i
-              class="fa fa-search absolute right-3 top-1 hover:text-red-600 hover:cursor-pointer"
+              class="fa fa-search absolute right-3 top-3 hover:text-red-600 hover:cursor-pointer"
               aria-hidden="true"
             ></i>
           </label>
         </div>
-        <div>
+        <div class="flex items-center gap-2">
           <select name="" id="">
             <option value="">AZ</option>
           </select>
           <button>Hesabım</button>
           <a href="wishlist.html"
+          class="relative"
             ><i class="fa-regular fa-heart"></i
-            ><sup class="text-[16px] text-red-700" id="wish-count">0</sup></a
+            ><div class="text-[16px] bg-red-500 text-white rounded-full w-4 h-4 absolute bottom-3 left-4 flex items-center justify-center" id="wish-count">0</div></a
           >
           <a href="basket.html"
-            ><i class="fa fa-shopping-bag" aria-hidden="true"></i
-            ><sup class="text-[16px] text-red-700" id="basket-count">0</sup></a
+          class="flex relative" 
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" fill="currentColor" class="bi bi-handbag" viewBox="0 0 16 16">
+            <path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2m3 4V3a3 3 0 1 0-6 0v2H3.36a1.5 1.5 0 0 0-1.483 1.277L.85 13.13A2.5 2.5 0 0 0 3.322 16h9.355a2.5 2.5 0 0 0 2.473-2.87l-1.028-6.853A1.5 1.5 0 0 0 12.64 5zm-1 1v1.5a.5.5 0 0 0 1 0V6h1.639a.5.5 0 0 1 .494.426l1.028 6.851A1.5 1.5 0 0 1 12.678 15H3.322a1.5 1.5 0 0 1-1.483-1.723l1.028-6.851A.5.5 0 0 1 3.36 6H5v1.5a.5.5 0 1 0 1 0V6z"/>
+            </svg><div class="text-[16px] bg-red-500 text-white rounded-full w-4 h-4 absolute bottom-2 left-4 flex items-center justify-center" id="basket-count">0</div></a
           >
         </div>
       </div>

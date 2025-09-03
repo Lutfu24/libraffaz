@@ -1,10 +1,9 @@
-import obj from "./popupservice.js";
 import getAllData from "./url.js";
+import { showPopUpElm, showPopUpElm2, showPopUp } from "./popupservice.js";
 
 async function useFetch() {
   try {
     const data = await getAllData();
-    console.log(data);
     if (!data) throw new Error("data bosdur!");
     showCards(data);
     checkWish();
@@ -19,12 +18,18 @@ function showCards(data) {
   data.forEach((element) => {
     element.price = Number(element.price);
     element.sale = Number(element.sale);
-    html += `<div class="py-[10px] px-[20px] relative">
+    html += `<div onmouseover="showHeart(${
+      element.id
+    })" onmouseout="hideHeart(${
+      element.id
+    })" class="py-[10px] px-[20px] relative hover:border-2 hover:rounded-2xl hover:border-gray-300 hover:drop-shadow-xl/50">
               <button onclick="addWish(${
                 element.id
-              })" class="absolute top-1 right-2"><i id="wish-btn${
+              })" class="absolute hidden top-1 right-2" id="wish${
       element.id
-    }" class="fa-regular fa-heart bg-white text-2xl text-gray-500 hover:text-red-600 hover:cursor-pointer"></i></button>
+    }"><i id="wish-btn${
+      element.id
+    }" class="fa-regular fa-heart bg-white text-2xl text-gray-500 hover:text-red-600 hover:cursor-pointer" style="clip-path: polygon(51% 14%, 80% 0, 92% 29%, 85% 69%, 50% 100%, 16% 68%, 5% 28%, 20% 0);"></i></button>
               <a href="detail.html?id=${element.id}">
               <img class="rounded-2xl" src="${element.image}" alt="img">
               </a>
@@ -42,80 +47,33 @@ function showCards(data) {
   document.getElementById("cards").innerHTML = html;
 }
 
-function showPopUp() {
-  document.getElementById("pop-up").classList.toggle("hidden");
-}
+document.showHeart = (id) => {
+  document.getElementById(`wish${id}`).classList.remove("hidden");
+};
+
+document.hideHeart = (id) => {
+  document.getElementById(`wish${id}`).classList.add("hidden");
+};
 
 document.getElementById("catalog-btn").addEventListener("click", showPopUp);
 document.getElementById("pop-up").addEventListener("click", function () {
   document.getElementById("pop-up").classList.add("hidden");
+  document.getElementById(
+    "catalog-btn"
+  ).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-grid" viewBox="0 0 16 16">
+                   <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
+                   </svg><span>Kataloq</span>`;
 });
 document.getElementById("pop-up-item").addEventListener("click", (e) => {
   e.stopPropagation();
 });
 
-Object.entries(obj).forEach(([key, value]) => {
-  document.querySelector(
-    ".first-ul"
-  ).innerHTML += `<span class="absolute text-gray-400 right-0">⟩</span><a href="book.html"><li class="first-list hover:text-red-600 w-full">${key}</li></a>`;
-  if (key === "Kitab") {
-    Object.entries(value).forEach(([key, value]) => {
-      document.querySelector(
-        ".second-ul"
-      ).innerHTML += `<span class="absolute text-gray-400 right-0">⟩</span><li class="second-list cursor-pointer hover:text-red-600">${key}</li>`;
-      if (key === "Bədii ədəbiyyat")
-        value.forEach((item) => {
-          document.querySelector(
-            ".third-ul"
-          ).innerHTML += `<a href="book.html?categ=${item}"><li class="cursor-pointer hover:text-red-600">${item}</li></a>`;
-        });
-    });
-  }
-});
-
-document.querySelectorAll(".first-list").forEach((li) => {
-  li.addEventListener("mouseenter", showPopUpElm);
-});
-
-function showPopUpElm(e) {
-  console.log(e.target.innerHTML);
-  document.querySelector(".second-ul").innerHTML = "";
-  document.querySelector(".third-ul").innerHTML = "";
-  const elm = Object.keys(obj).find((item) => item === e.target.innerText);
-  Object.entries(obj[elm]).forEach(([key, value]) => {
-    document.querySelector(
-      ".second-ul"
-    ).innerHTML += `<span class="absolute text-gray-400 right-0">⟩</span><li class="second-list cursor-pointer hover:text-red-600">${key}</li>`;
-    if (key === "Bədii ədəbiyyat")
-      value.forEach((item) => {
-        document.querySelector(
-          ".third-ul"
-        ).innerHTML += `<a href="book.html?categ=${item}"><li  class="cursor-pointer hover:text-red-600">${item}</li></a>`;
-      });
-  });
-  document.querySelectorAll(".second-list").forEach((li) => {
-    li.addEventListener("mouseenter", showPopUpElm2);
-  });
-}
-
 document.querySelectorAll(".second-list").forEach((li) => {
   li.addEventListener("mouseenter", showPopUpElm2);
 });
-
-function showPopUpElm2(e) {
-  document.querySelector(".third-ul").innerHTML = "";
-  Object.entries(obj).forEach(([key, value]) => {
-    const elm = Object.keys(obj[key]).find(
-      (item) => item === e.target.innerText
-    );
-    if (elm)
-      value[elm].forEach((item) => {
-        document.querySelector(
-          ".third-ul"
-        ).innerHTML += `<a href="book.html?categ=${item}"><li  class="cursor-pointer hover:text-red-600">${item}</li></a>`;
-      });
-  });
-}
+document.querySelectorAll(".first-list").forEach((li) => {
+  li.addEventListener("mouseenter", showPopUpElm);
+});
 
 let wishArr = JSON.parse(localStorage.getItem("wishlist")) || [];
 function checkWish() {
