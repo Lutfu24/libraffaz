@@ -1,5 +1,6 @@
 import getAllData from "./url.js";
 import { showPopUpElm, showPopUpElm2, showPopUp } from "./popupservice.js";
+import { showBasket } from "./header.js";
 
 document.querySelectorAll(".second-list").forEach((li) => {
   li.addEventListener("mouseenter", showPopUpElm2);
@@ -25,22 +26,22 @@ document.getElementById("basket-count").innerText = basket.length;
 const wishArr = JSON.parse(localStorage.getItem("wishlist")) || [];
 document.getElementById("wish-count").innerText = wishArr.length;
 
+let data = [];
 async function useFetch() {
   const res = await getAllData();
-  showBasket(res);
+  data = res;
+  showBasketData(res);
   sum();
 }
 useFetch();
 
-function showBasket(data) {
+function showBasketData(data) {
   let basket = JSON.parse(localStorage.getItem("basket")) || [];
   let html = "";
   basket.forEach((obj) => {
-    const inp = localStorage.getItem(`inp${obj.item}`);
+    const inp = obj.count;
     if (!obj.count) obj.count = 1;
     data.forEach((item) => {
-      item.price = Number(item.price);
-      item.sale = Number(item.sale);
       if (Number(item.id) === obj.item)
         html += `<div class="flex relative my-3 mx-2">
                   <img
@@ -90,7 +91,6 @@ document.sumTotal = function (e, id) {
   if (findElem) findElem.count = inp.value;
   basket.splice(id, 1);
   localStorage.setItem("basket", JSON.stringify(basket));
-  localStorage.setItem(`inp${id}`, inp.value);
   sum();
 };
 
@@ -103,6 +103,7 @@ function deleteBasket() {
   document.getElementById("basket-count").innerText = basket.length;
   document.getElementById("basket").innerHTML = "";
   sum();
+  showBasket(data);
 }
 document.getElementById("delete-btn").addEventListener("click", deleteBasket);
 
@@ -117,6 +118,7 @@ document.deleteById = function (id) {
   let baskett = JSON.parse(localStorage.getItem("basket")) || [];
   document.getElementById("basket-count").innerText = baskett.length;
   useFetch();
+  showBasket(data);
 };
 
 function sum() {

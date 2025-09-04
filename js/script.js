@@ -16,8 +16,6 @@ useFetch();
 function showCards(data) {
   let html = "";
   data.forEach((element) => {
-    element.price = Number(element.price);
-    element.sale = Number(element.sale);
     html += `<div onmouseover="showHeart(${
       element.id
     })" onmouseout="hideHeart(${

@@ -1,5 +1,7 @@
 import { getByIdData } from "./url.js";
+import getAllData from "./url.js";
 import { showPopUpElm, showPopUpElm2, showPopUp } from "./popupservice.js";
+import { showBasket } from "./header.js";
 
 document.querySelectorAll(".second-list").forEach((li) => {
   li.addEventListener("mouseenter", showPopUpElm2);
@@ -28,10 +30,14 @@ document.getElementById("wish-count").innerText = wishArr.length;
 const query = location.search;
 const id = new URLSearchParams(query).get("id");
 
+let data = [];
 async function useFetch() {
   try {
     const res = await getByIdData(id);
+    const resAll = await getAllData();
+
     if (!res) throw new Error("data bosdur!");
+    data = resAll;
     showCard(res);
   } catch (err) {
     console.error(err.message);
@@ -40,8 +46,6 @@ async function useFetch() {
 useFetch();
 
 function showCard(res) {
-  res.price = Number(res.price);
-  res.sale = Number(res.sale);
   let html = "";
   html += `<div class="flex justify-between max-xl:flex-col">
           <div class="w-full flex justify-center items-center">
@@ -118,4 +122,5 @@ document.addBasket = function (id) {
   }
   localStorage.setItem("basket", JSON.stringify(basketArr));
   document.getElementById("basket-count").innerText = basketArr.length;
+  showBasket(data);
 };

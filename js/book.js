@@ -52,12 +52,10 @@ function getByCategData(data) {
   const genre = new URLSearchParams(query).get("categ");
   const filteredData = data.filter((item) => item.genre === genre);
   filteredData.forEach((element) => {
-    element.price = Number(element.price);
-    element.sale = Number(element.sale);
-    html += `<div class="py-[10px] px-[20px] relative">
+    html += `<div class="py-[10px] px-[20px] relative hover:border-2 hover:rounded-2xl hover:border-gray-300 hover:drop-shadow-xl/50">
                 <button onclick="addWish(${
                   element.id
-                })" class="absolute top-1 right-2"><i id="wish-btn${
+                })" class="absolute top-1 right-2" style="clip-path: polygon(51% 14%, 80% 0, 92% 29%, 85% 69%, 50% 100%, 16% 68%, 5% 28%, 20% 0);"><i id="wish-btn${
       element.id
     }" class="fa-regular fa-heart bg-white text-2xl text-gray-500 hover:text-red-600 hover:cursor-pointer"></i></button>
                 <a href="detail.html?id=${element.id}">

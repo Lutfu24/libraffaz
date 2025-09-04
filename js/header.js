@@ -1,3 +1,38 @@
+import getAllData from "./url.js";
+
+async function useFetch() {
+  const res = await getAllData();
+  showBasket(res);
+}
+useFetch();
+
+function showBasket(data) {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  let html = "";
+  console.log(data);
+  if (basket.length === 0) {
+    document.getElementById("basket-modal-content").innerHTML = "Səbət boşdur";
+    return;
+  }
+  basket.forEach((obj) => {
+    data
+      .filter((item) => item.id === obj.item)
+      .forEach((item) => {
+        html += `<div class="flex justify-between items-center w-[350px]">
+            <img class="w-20 ml-2" src="${item.image}"/>
+            <p class="font-bold absolute right-40">${item.name.slice(
+              0,
+              17
+            )}<br/>${item.name.slice(17, 32)}<br/>${item.name.slice(32)}</p>
+            <p class="absolute right-25">${item.price} ₼</p>
+            <input value=1 class="absolute right-10 border-1 rounded-md border-red-500 outline-none w-[30px] text-center" type="number" />
+            <button class="absolute right-3 text-red-500 font-bold">✕</button>
+           </div>`;
+      });
+    document.getElementById("basket-modal-content").innerHTML = html;
+  });
+}
+
 export default function showHeader() {
   return `<header class="w-full flex justify-center">
       <div class="w-[70%] h-[100px] flex justify-between items-center">
@@ -61,13 +96,16 @@ export default function showHeader() {
             ><i class="fa-regular fa-heart"></i
             ><div class="text-[16px] bg-red-500 text-white rounded-full w-4 h-4 absolute bottom-3 left-4 flex items-center justify-center" id="wish-count">0</div></a
           >
-          <a href="basket.html"
-          class="flex relative" 
-            >
+          <button class="flex relative cursor-pointer" onclick="openBasketModal()">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" fill="currentColor" class="bi bi-handbag" viewBox="0 0 16 16">
             <path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2m3 4V3a3 3 0 1 0-6 0v2H3.36a1.5 1.5 0 0 0-1.483 1.277L.85 13.13A2.5 2.5 0 0 0 3.322 16h9.355a2.5 2.5 0 0 0 2.473-2.87l-1.028-6.853A1.5 1.5 0 0 0 12.64 5zm-1 1v1.5a.5.5 0 0 0 1 0V6h1.639a.5.5 0 0 1 .494.426l1.028 6.851A1.5 1.5 0 0 1 12.678 15H3.322a1.5 1.5 0 0 1-1.483-1.723l1.028-6.851A.5.5 0 0 1 3.36 6H5v1.5a.5.5 0 1 0 1 0V6z"/>
             </svg><div class="text-[16px] bg-red-500 text-white rounded-full w-4 h-4 absolute bottom-2 left-4 flex items-center justify-center" id="basket-count">0</div></a
-          >
+          </button>
+        </div>
+        <div id="basket-modal" class="w-[400px] z-50 rounded-2xl bg-gray-200 absolute right-[280px] top-18 hidden animate__animated animate__fadeIn animate__fast">
+          <h1 class="font-bold inline text-[14px] ml-2">Səbətdəki məhsullar:</h1><span class="absolute right-3 cursor-pointer" onclick="closeModal()">✕</span>
+          <div id="basket-modal-content" class="flex-col relative border-t-1 border-b-1 border-gray-400 bg-white text-[14px] flex justify-center items-center gap-3 py-2 px-3 min-h-[100px] max-h-[420px] overflow-y-auto">Səbət boşdur</div>
+          <a href="basket.html" class="px-26 mx-17 my-3 inline-block py-1 rounded-3xl border-2 border-red-500 font-bold cursor-pointer">Səbət</a>
         </div>
       </div>
     </header>
@@ -88,3 +126,13 @@ export default function showHeader() {
       </div>
     </header>`;
 }
+
+document.openBasketModal = function () {
+  document.getElementById("basket-modal").classList.toggle("hidden");
+};
+
+document.closeModal = function () {
+  document.getElementById("basket-modal").classList.add("hidden");
+};
+
+export { showBasket };

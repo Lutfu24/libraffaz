@@ -41,9 +41,7 @@ function showWish() {
     filteredArr.push(...data.filter((item) => Number(item.id) === id));
   });
   filteredArr.forEach((element) => {
-    element.price = Number(element.price);
-    element.sale = Number(element.sale);
-    html += `<div class="py-[10px] px-[20px] relative">
+    html += `<div class="py-[10px] px-[20px] relative hover:border-2 hover:rounded-2xl hover:border-gray-300 hover:drop-shadow-xl/50">
               <button onclick="removeWish(${
                 element.id
               })" class="absolute top-1 right-2" style="clip-path: polygon(51% 14%, 80% 0, 92% 29%, 85% 69%, 50% 100%, 16% 68%, 5% 28%, 20% 0);"><i id="wish-btn${
