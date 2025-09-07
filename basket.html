@@ -15,6 +15,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+      rel="stylesheet"
+    />
     <title>Document</title>
   </head>
   <body>
@@ -25,8 +29,9 @@
         <p
           class="relative my-2 text-gray-400 text-[14px] border-b-1 border-solid border-gray-300 pb-2"
         >
-          Məhsul<span class="absolute right-80">Qiyməti</span
-          ><span class="absolute right-40">Say</span
+          Məhsul<span class="absolute right-80 max-lg:right-50 max-sm:right-15"
+            >Qiyməti</span
+          ><span class="absolute right-40 max-lg:right-30">Say</span
           ><span class="absolute right-0">Cəm (₼)</span>
         </p>
         <div id="basket"></div>
@@ -47,12 +52,12 @@
           </a>
           <button
             id="delete-btn"
-            class="border-2 border-solid border-red-600 font-semibold rounded-3xl px-3 py-1 ml-3 cursor-pointer"
+            class="border-2 border-solid max-sm:mt-3 border-red-600 font-semibold rounded-3xl px-3 py-1 ml-3 cursor-pointer"
           >
             Səbəti təmizlə
           </button>
           <button
-            class="absolute right-0 bg-red-500 text-white font-semibold rounded-3xl px-5 py-2 cursor-pointer"
+            class="absolute right-0 max-md:top-15 max-md:right-40 max-sm:top-20 bg-red-500 text-white font-semibold rounded-3xl px-5 py-2 cursor-pointer"
           >
             ✓ Sifarişi təsdiqlə
           </button>
@@ -61,5 +66,7 @@
     </section>
     <script type="module" src="./middleware/head.js"></script>
     <script type="module" src="./js/basket.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   </body>
 </html>

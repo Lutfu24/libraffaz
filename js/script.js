@@ -1,10 +1,16 @@
 import getAllData from "./url.js";
 import { showPopUpElm, showPopUpElm2, showPopUp } from "./popupservice.js";
 
+toastr.options = {
+  positionClass: "toast-bottom-right",
+};
+
+let response = [];
 async function useFetch() {
   try {
     const data = await getAllData();
     if (!data) throw new Error("data bosdur!");
+    response = data;
     showCards(data);
     checkWish();
   } catch (err) {
@@ -88,9 +94,11 @@ document.addWish = (id) => {
       1
     );
     document.getElementById(`wish-btn${id}`).style.color = "gray";
+    toastr.success("kitab seçilmişlərdən silindi...");
   } else {
     wishArr.push(id);
     document.getElementById(`wish-btn${id}`).style.color = "red";
+    toastr.success("kitab seçilmişlərə əlavə olundu...");
   }
   localStorage.setItem("wishlist", JSON.stringify(wishArr));
   document.getElementById("wish-count").innerText = wishArr.length;
@@ -98,3 +106,25 @@ document.addWish = (id) => {
 
 const basket = JSON.parse(localStorage.getItem("basket")) || [];
 document.getElementById("basket-count").innerText = basket.length;
+
+document.filterLanguage = function (e) {
+  document.querySelectorAll(".span").forEach((span) => {
+    if (span.classList.contains("border-b-2", "border-red-600", "text-black"))
+      span.classList.remove("border-b-2", "border-red-600", "text-black");
+  });
+  e.target.classList.add("border-b-2", "border-red-600", "text-black");
+
+  const filteredData = response.filter((obj) =>
+    obj.language.includes(
+      e.target.innerText === "Azərbaycan"
+        ? "Azərbaycan dili"
+        : e.target.innerText === "Rusca"
+        ? "Rus"
+        : e.target.innerText === "İngiliscə"
+        ? "İngilis"
+        : ""
+    )
+  );
+  if (!filteredData) return null;
+  showCards(filteredData);
+};

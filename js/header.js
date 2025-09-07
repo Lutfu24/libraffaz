@@ -1,7 +1,9 @@
 import getAllData from "./url.js";
 
+let response = [];
 async function useFetch() {
   const res = await getAllData();
+  response = res;
   showBasket(res);
 }
 useFetch();
@@ -9,7 +11,6 @@ useFetch();
 function showBasket(data) {
   let basket = JSON.parse(localStorage.getItem("basket")) || [];
   let html = "";
-  console.log(data);
   if (basket.length === 0) {
     document.getElementById("basket-modal-content").innerHTML = "Səbət boşdur";
     return;
@@ -24,14 +25,45 @@ function showBasket(data) {
               0,
               17
             )}<br/>${item.name.slice(17, 32)}<br/>${item.name.slice(32)}</p>
-            <p class="absolute right-25">${item.price} ₼</p>
-            <input value=1 class="absolute right-10 border-1 rounded-md border-red-500 outline-none w-[30px] text-center" type="number" />
-            <button class="absolute right-3 text-red-500 font-bold">✕</button>
+            <p class="absolute right-25"><del class="text-red-500">${(
+              item.price * obj.count
+            ).toFixed(2)} ₼</del><br/>${(
+          (item.price - (item.price * item.sale) / 100) *
+          obj.count
+        ).toFixed(2)} ₼</p>
+            <input oninput="changeValueInp(event,${obj.item})" value=${
+          obj.count
+        } class="absolute right-10 border-1 rounded-md border-red-500 outline-none w-[30px] text-center" type="number" />
+            <button onclick="deleteItem(${
+              item.id
+            })" class="absolute cursor-pointer right-3 text-red-500 font-bold">✕</button>
            </div>`;
       });
     document.getElementById("basket-modal-content").innerHTML = html;
   });
 }
+
+document.deleteItem = function (id) {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  const findData = basket.find((i) => i.item === id);
+  if (!findData) return null;
+  const newBasket = basket.filter((i) => i.item !== findData.item);
+  localStorage.setItem("basket", JSON.stringify(newBasket));
+  let baskett = JSON.parse(localStorage.getItem("basket")) || [];
+  document.getElementById("basket-count").innerText = baskett.length;
+  showBasket(response);
+  toastr.success("kitab səbətdən silindi...");
+};
+
+document.changeValueInp = function (e, id) {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  let findData = basket.find((obj) => obj.item === id);
+  const findData2 = findData;
+  findData.count = Number(e.target.value);
+  basket.splice(basket.indexOf(findData2), 1, findData);
+  localStorage.setItem("basket", JSON.stringify(basket));
+  showBasket(response);
+};
 
 export default function showHeader() {
   return `<header class="w-full flex justify-center">
@@ -76,7 +108,7 @@ export default function showHeader() {
           </div>
           <label class="relative max-xl:hidden">
             <input
-              class="w-[500px] outline-none py-2 rounded-3xl pl-4 placeholder:text-black placeholder:text-[14px] border-1 border-solid border-sky-300"
+              class="w-[500px] outline-none py-2 rounded-3xl pl-4 max-2xl:w-[400px] placeholder:text-black placeholder:text-[14px] border-1 border-solid border-sky-300"
               type="search"
               placeholder="Növbəti kitabınızı axtarın"
             />
@@ -102,10 +134,10 @@ export default function showHeader() {
             </svg><div class="text-[16px] bg-red-500 text-white rounded-full w-4 h-4 absolute bottom-2 left-4 flex items-center justify-center" id="basket-count">0</div></a
           </button>
         </div>
-        <div id="basket-modal" class="w-[400px] z-50 rounded-2xl bg-gray-200 absolute right-[280px] top-18 hidden animate__animated animate__fadeIn animate__fast">
+        <div id="basket-modal" class="w-[400px] z-50 rounded-2xl bg-gray-200 absolute right-[280px] max-2xl:right-[200px] max-xl:right-[150px] max-md:right-[100px] max-sm:right-[50px] max-sm:w-[300px] top-18 hidden animate__animated animate__fadeIn animate__fast">
           <h1 class="font-bold inline text-[14px] ml-2">Səbətdəki məhsullar:</h1><span class="absolute right-3 cursor-pointer" onclick="closeModal()">✕</span>
           <div id="basket-modal-content" class="flex-col relative border-t-1 border-b-1 border-gray-400 bg-white text-[14px] flex justify-center items-center gap-3 py-2 px-3 min-h-[100px] max-h-[420px] overflow-y-auto">Səbət boşdur</div>
-          <a href="basket.html" class="px-26 mx-17 my-3 inline-block py-1 rounded-3xl border-2 border-red-500 font-bold cursor-pointer">Səbət</a>
+          <a href="basket.html" class="px-26 mx-17 max-sm:mx-6 my-3 inline-block py-1 rounded-3xl border-2 border-red-500 font-bold cursor-pointer">Səbət</a>
         </div>
       </div>
     </header>
@@ -114,7 +146,7 @@ export default function showHeader() {
         <ul class="flex gap-3 text-[14px] font-semibold">
           <li>Bestseller-iyul</li>
           <li>Endirimlər</li>
-          <li>Müəlliflər</li>
+          <a href="authors.html" class="hover:text-red-600"><li>Müəlliflər</li></a>
           <a href="book.html?categ=Klassiklər" class="hover:text-red-600"><li>Klassiklər</li></a>
         </ul>
         <ul class="flex gap-3 text-[14px] text-gray-600">

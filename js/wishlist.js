@@ -1,6 +1,10 @@
 import getAllData from "./url.js";
 import { showPopUpElm, showPopUpElm2, showPopUp } from "./popupservice.js";
 
+toastr.options = {
+  positionClass: "toast-bottom-right",
+};
+
 document.querySelectorAll(".second-list").forEach((li) => {
   li.addEventListener("mouseenter", showPopUpElm2);
 });
@@ -82,4 +86,5 @@ document.removeWish = (id) => {
   document.getElementById("wish-count").innerText = wishArr.length;
   showWish();
   checkWish();
+  toastr.success("kitab seçilmişlərdən silindi...");
 };

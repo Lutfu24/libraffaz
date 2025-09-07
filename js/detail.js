@@ -3,6 +3,10 @@ import getAllData from "./url.js";
 import { showPopUpElm, showPopUpElm2, showPopUp } from "./popupservice.js";
 import { showBasket } from "./header.js";
 
+toastr.options = {
+  positionClass: "toast-bottom-right",
+};
+
 document.querySelectorAll(".second-list").forEach((li) => {
   li.addEventListener("mouseenter", showPopUpElm2);
 });
@@ -109,8 +113,8 @@ function showCard(res) {
   document.getElementById("card").innerHTML = html;
 }
 
-const basketArr = JSON.parse(localStorage.getItem("basket")) || [];
 document.addBasket = function (id) {
+  const basketArr = JSON.parse(localStorage.getItem("basket")) || [];
   let obj = {
     count: 1,
     item: id,
@@ -123,4 +127,5 @@ document.addBasket = function (id) {
   localStorage.setItem("basket", JSON.stringify(basketArr));
   document.getElementById("basket-count").innerText = basketArr.length;
   showBasket(data);
+  toastr.success("Kitab səbətə əlavə olundu...");
 };

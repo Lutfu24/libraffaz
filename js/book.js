@@ -1,6 +1,10 @@
 import getAllData from "./url.js";
 import { showPopUpElm, showPopUpElm2, showPopUp } from "./popupservice.js";
 
+toastr.options = {
+  positionClass: "toast-bottom-right",
+};
+
 document.querySelectorAll(".second-list").forEach((li) => {
   li.addEventListener("mouseenter", showPopUpElm2);
 });
@@ -82,9 +86,11 @@ document.addWish = (id) => {
       1
     );
     document.getElementById(`wish-btn${id}`).style.color = "gray";
+    toastr.success("kitab seçilmişlərdən silindi...");
   } else {
     wishArr.push(id);
     document.getElementById(`wish-btn${id}`).style.color = "red";
+    toastr.success("kitab seçilmişlərə əlavə olundu...");
   }
   localStorage.setItem("wishlist", JSON.stringify(wishArr));
   document.getElementById("wish-count").innerText = wishArr.length;

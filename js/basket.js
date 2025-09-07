@@ -2,6 +2,10 @@ import getAllData from "./url.js";
 import { showPopUpElm, showPopUpElm2, showPopUp } from "./popupservice.js";
 import { showBasket } from "./header.js";
 
+toastr.options = {
+  positionClass: "toast-bottom-right",
+};
+
 document.querySelectorAll(".second-list").forEach((li) => {
   li.addEventListener("mouseenter", showPopUpElm2);
 });
@@ -43,34 +47,36 @@ function showBasketData(data) {
     if (!obj.count) obj.count = 1;
     data.forEach((item) => {
       if (Number(item.id) === obj.item)
-        html += `<div class="flex relative my-3 mx-2">
+        html += `<div class="flex relative my-3 mx-2 max-md:flex-col">
                   <img
                     class="w-[150px] h-[200px]"
                     src="${item.image}"
                     alt="img"
                   />
-                  <p class="mx-15 text-red-500">${
+                  <p class="mx-15 max-lg:mx-5 text-red-500">${
                     item.name
                   } <button class="cursor-pointer" onclick="deleteById(${
           item.id
         })"><i class="fa-solid fa-circle-xmark"></i></button></p>
                   <p id="price${
                     item.id
-                  }" class="absolute right-93 text-red-500 text-[14px]"><del>${item.price.toFixed(
+                  }" class="absolute right-93 max-lg:right-53 max-sm:right-15 text-red-500 text-[14px]"><del>${item.price.toFixed(
           2
         )} ₼</del></p>
-                  <p class="absolute right-80">${(
+                  <p class="absolute right-80 max-lg:right-40 max-sm:right-15 max-sm:top-5">${(
                     item.price -
                     (item.price * item.sale) / 100
                   ).toFixed(2)}₼</p>
                   <input
-                    class="absolute right-40 w-[100px] h-[40px] rounded-md outline-none pl-2 hover:border border-solid border-red-500"
+                    class="absolute right-40 max-lg:right-10 w-[100px] h-[40px] rounded-md outline-none pl-2 hover:border border-solid border-red-500"
                     type="text"
                     value=${!inp ? 1 : inp}
                     id="input${item.id}"
                     oninput="sumTotal(event,${item.id})"
                   />
-                  <p id="total${item.id}" class="absolute right-0 font-bold">${(
+                  <p id="total${
+                    item.id
+                  }" class="absolute right-0 font-bold max-sm:-right-5">${(
           (item.price - (item.price * item.sale) / 100) *
           obj.count
         ).toFixed(2)} ₼</p>
@@ -104,6 +110,7 @@ function deleteBasket() {
   document.getElementById("basket").innerHTML = "";
   sum();
   showBasket(data);
+  toastr.success("kitablar hamısı səbətdən silindi...");
 }
 document.getElementById("delete-btn").addEventListener("click", deleteBasket);
 
@@ -113,12 +120,11 @@ document.deleteById = function (id) {
   if (!findData) return null;
   const newBasket = basket.filter((i) => i.item !== findData.item);
   localStorage.setItem("basket", JSON.stringify(newBasket));
-  const inp = localStorage.getItem(`inp${id}`);
-  if (inp) localStorage.removeItem(`inp${id}`);
   let baskett = JSON.parse(localStorage.getItem("basket")) || [];
   document.getElementById("basket-count").innerText = baskett.length;
   useFetch();
   showBasket(data);
+  toastr.success("kitab səbətdən silindi...");
 };
 
 function sum() {
