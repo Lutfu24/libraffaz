@@ -101,6 +101,10 @@ document.sumTotal = function (e, id) {
 };
 
 function deleteBasket() {
+  if (basket.length === 0) {
+    toastr.error("Səbət boşdur!!!");
+    return;
+  }
   basket.forEach((i) => {
     localStorage.removeItem(`inp${i.item}`);
   });
