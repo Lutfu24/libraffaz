@@ -101,6 +101,11 @@ document.sumTotal = function (e, id) {
 };
 
 function deleteBasket() {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  if (basket.length === 0) {
+    toastr.error("Səbət boşdur!!!");
+    return;
+  }
   basket.forEach((i) => {
     localStorage.removeItem(`inp${i.item}`);
   });

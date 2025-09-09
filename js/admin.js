@@ -1,4 +1,4 @@
-import getAllData from "./url.js";
+import getAllData, { create, remove, update } from "./url.js";
 
 let data = [];
 async function useFetch() {
@@ -48,9 +48,7 @@ function showData(res) {
 }
 
 document.deleteDataById = async function (id) {
-  await fetch(`https://libraff-data-rlzv.onrender.com/books/${id}`, {
-    method: "DELETE",
-  });
+  await remove(id);
   await useFetch();
   swal({
     title: "deleted book!",
@@ -287,13 +285,7 @@ async function createData() {
     productObj.price &&
     productObj.sale
   ) {
-    await fetch("https://libraff-data-rlzv.onrender.com/books", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productObj),
-    });
+    await create(productObj);
     document.querySelectorAll("input").forEach((input) => {
       input.value = "";
     });
@@ -379,13 +371,7 @@ async function updateData(findData, id) {
     });
   }
 
-  await fetch(`https://libraff-data-rlzv.onrender.com/books/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(findData),
-  });
+  await update(id, findData);
   document.querySelectorAll("input").forEach((input) => {
     input.value = "";
   });

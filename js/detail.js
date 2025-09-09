@@ -1,4 +1,4 @@
-import { getByIdData } from "./url.js";
+import { getByIdData, update } from "./url.js";
 import getAllData from "./url.js";
 import { showPopUpElm, showPopUpElm2, showPopUp } from "./popupservice.js";
 import { showBasket } from "./header.js";
@@ -50,8 +50,10 @@ async function useFetch() {
 useFetch();
 
 function showCard(res) {
-  let html = "";
-  html += `<div class="flex justify-between max-xl:flex-col">
+  document.getElementById("card").innerHTML = "";
+  document.getElementById(
+    "card"
+  ).innerHTML += `<div class="flex justify-between max-xl:flex-col">
           <div class="w-full flex justify-center items-center">
             <img
               class="max-w-[600px] max-h-[600px]"
@@ -102,15 +104,32 @@ function showCard(res) {
         </div>
         <div class="flex items-center flex-col">
           <div class="w-[80%] flex justify-around items-center mt-15 mb-10">
-            <span class="text-2xl text-gray-500">Təsvir</span
+            <span onclick="openAbout(${
+              res.comments.length
+            })" class="text-2xl text-gray-500 hover:cursor-pointer hover:text-red-500">Təsvir</span
             ><span class="text-2xl text-gray-500 max-xl:hidden">Xüsusiyyəti</span
-            ><span class="text-2xl text-gray-500 max-xl:hidden">İstifadəçi rəyləri</span>
+            ><span onclick="openComments(${
+              res.comments.length
+            })" class="text-2xl text-gray-500 hover:cursor-pointer hover:text-red-500 max-xl:hidden">İstifadəçi rəyləri</span>
           </div>
-          <p class="w-[70%] ml-25 max-xl:ml-0 text-[20px]">${
+          <p id="description" class="w-[70%] ml-25 max-xl:ml-0 text-[20px]">${
             res.description
           }</p>
         </div>`;
-  document.getElementById("card").innerHTML = html;
+  res.comments.forEach((comment, index) => {
+    document.getElementById(
+      "card"
+    ).innerHTML += `<div id="comments${index}" class="flex justify-center w-full hidden">
+                    <p class="w-[60%] max-xl:ml-0 text-[20px] py-10 my-2 border-2 border-gray-300 drop-shadow-2xl rounded-2xl px-5">
+                    <i class="fa fa-user" aria-hidden="true"></i> user: <span class="text-gray-500">${comment}</span></p></div>`;
+  });
+  document.getElementById(
+    "card"
+  ).innerHTML += `<div id="comment-label" class="hidden mx-80">
+                  <input id="comment-inp" type="text" placeholder="şərh yazın..." class="outline-none mx-10 placeholder:mx-5">
+                  <button id="comment-btn" onclick="addComment(${res.id})" class="my-15 cursor-pointer hover:text-red-900 text-gray-500">Şərh əlavə et</button>
+                  </div>
+                  `;
 }
 
 document.addBasket = function (id) {
@@ -128,4 +147,37 @@ document.addBasket = function (id) {
   document.getElementById("basket-count").innerText = basketArr.length;
   showBasket(data);
   toastr.success("Kitab səbətə əlavə olundu...");
+};
+
+document.addComment = async function (id) {
+  const comment = document.getElementById("comment-inp");
+  if (!comment.value) {
+    swal({
+      title: "Şərh boş olmaz!",
+      icon: "error",
+      button: "ok!",
+    });
+    return null;
+  }
+  let data = await getByIdData(id);
+  data.comments.push(comment.value);
+  await update(id, data);
+  await useFetch();
+  toastr.success("comment əlavə olundu...");
+};
+
+document.openComments = function (length) {
+  for (let i = 0; i < length; i++) {
+    document.getElementById(`comments${i}`).classList.remove("hidden");
+  }
+  document.getElementById("description").classList.add("hidden");
+  document.getElementById("comment-label").classList.remove("hidden");
+};
+
+document.openAbout = function (length) {
+  for (let i = 0; i < length; i++) {
+    document.getElementById(`comments${i}`).classList.add("hidden");
+  }
+  document.getElementById("description").classList.remove("hidden");
+  document.getElementById("comment-label").classList.add("hidden");
 };
