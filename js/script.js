@@ -20,6 +20,10 @@ async function useFetch() {
 useFetch();
 
 function showCards(data) {
+  document.getElementById("cards").classList.add("grid");
+  document
+    .getElementById("cards")
+    .classList.remove("flex", "justify-center", "items-center", "h-[200px]");
   let html = "";
   data.forEach((element) => {
     html += `<div onmouseover="showHeart(${
@@ -50,6 +54,15 @@ function showCards(data) {
   });
   document.getElementById("cards").innerHTML = html;
 }
+
+function showLoader() {
+  document.getElementById("cards").classList.remove("grid");
+  document
+    .getElementById("cards")
+    .classList.add("flex", "justify-center", "items-center", "h-[200px]");
+  document.getElementById("cards").innerHTML = `<span class="loader"></span>`;
+}
+showLoader();
 
 document.showHeart = (id) => {
   document.getElementById(`wish${id}`).classList.remove("hidden");
