@@ -26,6 +26,7 @@ function showCards(data) {
     .classList.remove("flex", "justify-center", "items-center", "h-[200px]");
   let html = "";
   data.forEach((element) => {
+    console.log(element.price);
     html += `<div onmouseover="showHeart(${
       element.id
     })" onmouseout="hideHeart(${

@@ -66,6 +66,13 @@ function showCard(res) {
             <p class="py-2 text-gray-500 underline underline-offset-2">${
               res.author
             }</p>
+            
+            <button class="mr-3 cursor-pointer" id="like-btn" onclick="handleReactionLike(event,${
+              res.id
+            })"><i class="fa fa-thumbs-up text-gray-400 text-2xl" aria-hidden="true"></i></button>
+            <button class="cursor-pointer" id="dislike-btn" onclick="handleReactionDisLike(event,${
+              res.id
+            })"><i class="fa fa-thumbs-down text-gray-400 text-2xl" aria-hidden="true"></i></button>
             <p class="font-bold text-2xl pt-3">${(
               res.price -
               (res.price * res.sale) / 100
@@ -112,9 +119,9 @@ function showCard(res) {
               res.comments.length
             })" class="text-2xl text-gray-500 hover:cursor-pointer hover:text-red-500 max-xl:hidden">İstifadəçi rəyləri</span>
           </div>
-          <p id="description" class="w-[70%] ml-25 max-xl:ml-0 text-[20px]">${
+          <div id="description" class="w-[70%] ml-25 max-xl:ml-0 text-[20px]">${
             res.description
-          }</p>
+          }</div>
         </div>`;
   res.comments.forEach((comment, index) => {
     document.getElementById(
@@ -180,4 +187,48 @@ document.openAbout = function (length) {
   }
   document.getElementById("description").classList.remove("hidden");
   document.getElementById("comment-label").classList.add("hidden");
+};
+
+document.handleReactionLike = async function (e, id) {
+  let response = await getByIdData(id);
+  if (!response.isLike) {
+    e.target.innerText = response.like = response.like + 1;
+    e.target.classList.add("text-sky-700");
+    response.isLike = true;
+    if (response.isDisLike) {
+      document.getElementById("dislike-btn").children[0].innerText =
+        response.dislike = response.dislike - 1;
+      document
+        .getElementById("dislike-btn")
+        .children[0].classList.remove("text-red-700");
+      response.isDisLike = false;
+    }
+  } else {
+    e.target.innerText = response.like = response.like - 1;
+    e.target.classList.remove("text-sky-700");
+    response.isLike = false;
+  }
+  update(response.id, response);
+};
+
+document.handleReactionDisLike = async function (e, id) {
+  let response = await getByIdData(id);
+  if (!response.isDisLike) {
+    e.target.innerText = response.dislike = response.dislike + 1;
+    e.target.classList.add("text-red-700");
+    response.isDisLike = true;
+    if (response.isLike) {
+      document.getElementById("like-btn").children[0].innerText =
+        response.like = response.like - 1;
+      document
+        .getElementById("like-btn")
+        .children[0].classList.remove("text-sky-700");
+      response.isLike = false;
+    }
+  } else {
+    e.target.innerText = response.dislike = response.dislike - 1;
+    e.target.classList.remove("text-red-700");
+    response.isDisLike = false;
+  }
+  update(response.id, response);
 };

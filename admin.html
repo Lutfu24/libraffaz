@@ -36,17 +36,94 @@
 
       <section
         id="create-modal"
-        class="p-6 bg-gray-500/40 text-gray-900 hidden inset-0 fixed"
+        class="p-6 bg-gray-500/40 hidden text-gray-900 inset-0 fixed overflow-auto"
       >
         <div id="form" class="container flex flex-col mx-auto space-y-12">
-          <fieldset
-            class="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-50"
+          <div
+            id="modal"
+            class="px-25 py-5 rounded-2xl bg-white flex flex-col items-center"
           >
+            <label for="name" class="text-sm self-start">name</label>
+            <input
+              id="name"
+              type="text"
+              placeholder="name"
+              class="rounded-md focus:ring focus:ring-opacity-75 text-black focus:ring-violet-600 border-gray-300"
+            />
+            <label for="author" class="text-sm self-start my-5">author</label>
+            <input
+              id="author"
+              type="text"
+              placeholder="author"
+              class="rounded-md focus:ring focus:ring-opacity-75 text-black focus:ring-violet-600 border-gray-300"
+            />
+            <label for="genre" class="text-sm self-start my-5">genre</label>
+            <input
+              id="genre"
+              type="text"
+              placeholder="genre"
+              class="rounded-md focus:ring focus:ring-opacity-75 text-black focus:ring-violet-600 border-gray-300"
+            />
+            <label for="image" class="text-sm self-start my-5">image</label>
+            <input
+              id="image"
+              type="text"
+              placeholder="image"
+              class="rounded-md focus:ring focus:ring-opacity-75 text-black focus:ring-violet-600 border-gray-300"
+            />
+            <label for="price" class="text-sm self-start my-5">price</label>
+            <input
+              id="price"
+              type="number"
+              placeholder="price"
+              class="rounded-md focus:ring focus:ring-opacity-75 text-black focus:ring-violet-600 border-gray-300"
+            />
+            <label for="sale" class="text-sm self-start my-5">sale</label>
+            <input
+              id="sale"
+              type="number"
+              placeholder="sale"
+              class="rounded-md focus:ring focus:ring-opacity-75 text-black focus:ring-violet-600 border-gray-300"
+            />
+            <label for="description" class="text-sm self-start my-5"
+              >description</label
+            >
+            <textarea id="myArea">
+              Təsvir yazın...
+            </textarea>
+            <label for="language" class="text-sm self-start my-5"
+              >language</label
+            >
+            <input
+              id="language"
+              type="text"
+              placeholder="Azərbaycan dili Rus İngilis"
+              class="rounded-md focus:ring focus:ring-opacity-75 text-black focus:ring-violet-600 border-gray-300"
+            />
             <div
-              id="modal"
-              class="grid grid-cols-6 gap-4 col-span-full lg:col-span-3"
-            ></div>
-          </fieldset>
+              id="stock-div"
+              class="w-full flex flex-col items-center hidden"
+            >
+              <label for="stock" class="text-sm self-start my-5">stock</label>
+              <input
+                id="stock"
+                type="text"
+                placeholder="stock"
+                class="rounded-md focus:ring focus:ring-opacity-75 text-black focus:ring-violet-600 border-gray-300"
+              />
+            </div>
+            <div id="sell-div" class="w-full flex flex-col items-center hidden">
+              <label for="sellCount" class="text-sm self-start my-5"
+                >sell count</label
+              >
+              <input
+                id="sellCount"
+                type="text"
+                placeholder="sell count"
+                class="rounded-md focus:ring focus:ring-opacity-75 text-black focus:ring-violet-600 border-gray-300"
+              />
+            </div>
+          </div>
           <button
             id="create-btn"
             class="bg-green-900 cursor-pointer rounded-2xl px-5 py-2 text-white"
@@ -113,7 +190,8 @@
 
     <script>
       tinymce.init({
-        selector: "textarea",
+        selector: "#myArea",
+        apiKey: "cvrlloag6bgomra2zjg7sclbcla131aqdg45m6ursi0h5k8r",
         plugins: [
           "anchor",
           "autolink",
@@ -133,7 +211,6 @@
           "formatpainter",
           "pageembed",
           "a11ychecker",
-          "tinymcespellchecker",
           "permanentpen",
           "powerpaste",
           "advtable",
@@ -166,7 +243,8 @@
           respondWith.string(() =>
             Promise.reject("See docs to implement AI Assistant")
           ),
-        uploadcare_public_key: "5a5f4bcd269ec14af500",
+        uploadcare_public_key:
+          "cvrlloag6bgomra2zjg7sclbcla131aqdg45m6ursi0h5k8r",
       });
     </script>
   </body>
