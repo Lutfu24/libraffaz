@@ -43,7 +43,9 @@ function getAuthors(data) {
       group[firstLetter] = [];
     }
 
-    group[firstLetter].push(book);
+    if (!group[firstLetter].some((item) => item.author === book.author)) {
+      group[firstLetter].push(book);
+    }
   });
 
   Object.entries(group).forEach(([key, value]) => {
@@ -55,7 +57,7 @@ function getAuthors(data) {
     value.forEach((item) => {
       document.getElementById(
         `ul-authors${key}`
-      ).innerHTML += `<li class="hover:cursor-pointer hover:text-red-500">${item.author}</li>`;
+      ).innerHTML += `<li class="hover:text-red-500"><a href="authordetail.html?author=${item.author}">${item.author}</a></li>`;
     });
   });
 }

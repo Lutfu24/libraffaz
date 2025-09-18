@@ -63,9 +63,9 @@ function showCard(res) {
           </div>
           <div class="w-[900px] max-xl:w-full">
             <p class="text-3xl">${res.name}</p>
-            <p class="py-2 text-gray-500 underline underline-offset-2">${
+            <p class="py-2 text-gray-500 underline underline-offset-2"><a href="authordetail.html?author=${
               res.author
-            }</p>
+            }">${res.author}</a></p>
             
             <button class="mr-3 cursor-pointer" id="like-btn" onclick="handleReactionLike(event,${
               res.id
