@@ -179,7 +179,7 @@ async function updateData() {
   findData = {
     ...bookObj,
     comments: [],
-    price: Number(bookObj.price),
+    price: bookObj.price ? Number(bookObj.price) : Number(inputs[4].value),
     description: tinymce.get("myArea").getContent(),
     language: bookObj.language ? bookObj.language.split(" ") : languages,
   };
